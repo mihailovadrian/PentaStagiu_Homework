@@ -29,7 +29,7 @@ public class FileUtils {
 		return usersInformation.stream().collect(Collectors.toMap(e -> e[0], e -> e[1]));
 	}
 
-	// convert each line readed from the file to array
+	// converts each line readed from the file to array
 	private static String[] convertLineToArray(String line) {
 		String[] result = null;
 

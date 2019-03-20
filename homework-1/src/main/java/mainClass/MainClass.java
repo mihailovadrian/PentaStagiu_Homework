@@ -11,12 +11,15 @@ public class MainClass {
 	private static Scanner scanIn;
 
 	public static void main(String[] args) {
+
+		// PATH -ul E STATIC !!!!
 		Map<String, String> usersInformation = FileUtils.readUserInfoFromFile(Constants.inputFilePath);
 
 		boolean logedIn = false;
 		User userToLogIn = new User();
 		scanIn = new Scanner(System.in);
 		String option = null;
+
 		if (usersInformation != null) {
 			while (true) {
 				if (logedIn == false) {
