@@ -3,8 +3,8 @@ package mainClass;
 import java.util.Map;
 import java.util.Scanner;
 
+import entitys.User;
 import fileUtils.FileUtils;
-import projectConstants.Constants;
 
 public class MainClass {
 
@@ -12,35 +12,56 @@ public class MainClass {
 
 	public static void main(String[] args) {
 		Map<String, String> usersInformation = FileUtils.readUserInfoFromFile(Constants.inputFilePath);
-		String nameString = "";
-		String passString = "";
-		scanIn = new Scanner(System.in);
+
 		boolean logedIn = false;
-		System.out.println(usersInformation.toString());
-		
+		User userToLogIn = new User();
+		scanIn = new Scanner(System.in);
+		String option = null;
 		if (usersInformation != null) {
 			while (true) {
 				if (logedIn == false) {
+
 					System.out.println("User Name: ");
-					nameString = scanIn.nextLine();
+					userToLogIn.setUsername(scanIn.nextLine());
+					System.out.println("Password: ");
+					userToLogIn.setPassword(scanIn.nextLine());
 
-					if (nameString != null) {
-
-						System.out.println("Password: ");
-						passString = scanIn.nextLine();
-						System.out.println(usersInformation.get(nameString));
-						if (usersInformation.get(nameString).equals(passString)) {
-							System.out.println("Welcome user !");
-							logedIn = true;
-						} else {
-							System.out.println("Wrong username/password");
-						}
+					if (CheckUser(userToLogIn, usersInformation)) {
+						System.out.println("Welcome user !");
+						logedIn = true;
+					} else {
+						System.out.println("Wrong username/password");
 					}
+
 				} else {
-					break;
+					System.out.println("Type -L- if you want to log out: ");
+					option = scanIn.nextLine().toLowerCase();
+					switch (option) {
+					case "l":
+						logedIn = false;
+						break;
+					default:
+						System.out.println("I said -L- \n");
+						break;
+
+					}
 				}
 			}
 		}
+	}
+
+	// check if the user exist in MAP
+	private static boolean CheckUser(User user, Map<String, String> infoUsers) {
+		boolean result = false;
+
+		if (user != null && infoUsers.containsKey(user.getUsername())) {
+			if (infoUsers.get(user.getUsername()).equals(user.getPassword())) {
+				result = true;
+			}
+
+		}
+		return result;
+
 	}
 
 }

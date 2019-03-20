@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import projectConstants.Constants;
+import mainClass.Constants;
 
 public class FileUtils {
 
