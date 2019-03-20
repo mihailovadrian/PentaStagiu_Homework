@@ -14,10 +14,8 @@ import java.util.stream.Stream;
 import projectConstants.Constants;
 
 public class FileUtils {
-	
 
 	public static Map<String, String> readUserInfoFromFile(String fileName) {
-		Map<String, String> result = null;
 
 		List<String[]> usersInformation = new ArrayList<String[]>();
 
@@ -27,9 +25,8 @@ public class FileUtils {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		result = usersInformation.stream().collect(Collectors.toMap(e -> e[0], e -> e[1]));
-
-		return result;
+		//return the user information in a Map
+		return usersInformation.stream().collect(Collectors.toMap(e -> e[0], e -> e[1]));
 	}
 
 	// convert each line readed from the file to array
