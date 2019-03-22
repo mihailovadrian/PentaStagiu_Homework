@@ -1,4 +1,4 @@
-package entitys;
+package entity;
 
 public class User {
 	private String username;

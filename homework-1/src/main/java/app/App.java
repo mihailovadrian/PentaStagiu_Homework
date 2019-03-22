@@ -1,25 +1,26 @@
-package mainClass;
+package app;
 
 import java.util.InputMismatchException;
-import java.util.Map;
 import java.util.Scanner;
 
-import entitys.User;
+import appUtils.LoginUtils;
+import entity.User;
 import fileUtils.ReadUserInformation;
 
-public class MainClass {
+public class App {
 
 	public static void main(String[] args) {
 		ReadUserInformation userInformation = ReadUserInformation.getInstance();
 
 		boolean logedIn = false;
+		boolean exitApp = false;
 		User userToLogIn = new User();
 
 		String option = null;
 		// try-with-resources
 		try (Scanner scanIn = new Scanner(System.in)) {
 			if (userInformation != null) {
-				while (true) {
+				while (!exitApp) {
 					if (!logedIn) {
 
 						System.out.println("User Name: ");
@@ -27,7 +28,7 @@ public class MainClass {
 						System.out.println("Password: ");
 						userToLogIn.setPassword(scanIn.nextLine());
 
-						if (checkUser(userToLogIn, ReadUserInformation.getUsersInformation())) {
+						if (LoginUtils.checkUser(userToLogIn, ReadUserInformation.getUsersInformation())) {
 							System.out.println("Welcome user !");
 							logedIn = true;
 						} else {
@@ -42,7 +43,7 @@ public class MainClass {
 							logedIn = false;
 							break;
 						case "x":
-							System.exit(0);
+							exitApp = true;
 							break;
 						default:
 							System.out.println("I said -L- \n");
@@ -55,20 +56,6 @@ public class MainClass {
 		} catch (InputMismatchException ex) {
 			ex.printStackTrace();
 		}
-	}
-
-	// check if the user exist in the MAP
-	private static boolean checkUser(User user, Map<String, String> infoUsers) {
-		boolean result = false;
-
-		if (user != null && infoUsers.containsKey(user.getUsername())) {
-			if (infoUsers.get(user.getUsername()).equals(user.getPassword())) {
-				result = true;
-			}
-
-		}
-		return result;
-
 	}
 
 }

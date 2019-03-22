@@ -13,8 +13,6 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import mainClass.Constants;
-
 public class ReadUserInformation {
 	private static ReadUserInformation instance = null;
 	private static Map<String, String> usersInformation = null;
@@ -24,7 +22,7 @@ public class ReadUserInformation {
 		List<String[]> usersInformation = new ArrayList<String[]>();
 
 		try {
-			URI uriFileName = ClassLoader.getSystemResource(Constants.inputFilePath).toURI();
+			URI uriFileName = ClassLoader.getSystemResource(Constants.INPUT_USER_INFORMATION_FILE).toURI();
 			String filePath = Paths.get(uriFileName).toString();
 
 			// read file into stream, try-with-resources
@@ -46,7 +44,7 @@ public class ReadUserInformation {
 
 	}
 
-	static public ReadUserInformation getInstance() {
+	 public static ReadUserInformation getInstance() {
 		if (instance == null) {
 			instance = new ReadUserInformation();
 		}
@@ -57,7 +55,7 @@ public class ReadUserInformation {
 	private static String[] convertLineToArray(String line) {
 		String[] result = null;
 
-		result = line.split(Constants.inputFileValuesSeparator);
+		result = line.split(Constants.INPUT_FILE_SEPARATOR);
 
 		return result;
 
