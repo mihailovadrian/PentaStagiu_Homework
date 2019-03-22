@@ -10,8 +10,8 @@ public class User {
 
 	public User(String username, String password) {
 
-		setUsername(username);
-		setPassword(password);
+		this.username = username;
+		this.password = password;
 	}
 
 	public String getUsername() {
@@ -28,11 +28,6 @@ public class User {
 
 	public void setPassword(String password) {
 		this.password = password;
-	}
-
-	public void emptyUser() {
-		setPassword("");
-		setUsername("");
 	}
 
 }
