@@ -5,13 +5,12 @@ import java.util.Map;
 import java.util.Scanner;
 
 import entitys.User;
-import fileUtils.FileUtils;
+import fileUtils.ReadUserInformation;
 
 public class MainClass {
 
 	public static void main(String[] args) {
-
-		Map<String, String> usersInformation = FileUtils.readUserInfoFromFile(Constants.inputFilePath);
+		ReadUserInformation userInformation = ReadUserInformation.getInstance();
 
 		boolean logedIn = false;
 		User userToLogIn = new User();
@@ -19,16 +18,16 @@ public class MainClass {
 		String option = null;
 		// try-with-resources
 		try (Scanner scanIn = new Scanner(System.in)) {
-			if (usersInformation != null) {
+			if (userInformation != null) {
 				while (true) {
-					if (logedIn == false) {
+					if (!logedIn) {
 
 						System.out.println("User Name: ");
 						userToLogIn.setUsername(scanIn.nextLine());
 						System.out.println("Password: ");
 						userToLogIn.setPassword(scanIn.nextLine());
 
-						if (checkUser(userToLogIn, usersInformation)) {
+						if (checkUser(userToLogIn, ReadUserInformation.getUsersInformation())) {
 							System.out.println("Welcome user !");
 							logedIn = true;
 						} else {

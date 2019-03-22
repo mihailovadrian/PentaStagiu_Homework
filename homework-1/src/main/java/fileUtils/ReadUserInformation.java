@@ -15,19 +15,21 @@ import java.util.stream.Stream;
 
 import mainClass.Constants;
 
-public class FileUtils {
+public class ReadUserInformation {
+	private static ReadUserInformation instance = null;
+	private static Map<String, String> usersInformation = null;
 
-	public static Map<String, String> readUserInfoFromFile(String fileName) {
+	private ReadUserInformation() {
 
 		List<String[]> usersInformation = new ArrayList<String[]>();
 
 		try {
-			URI uriFileName = ClassLoader.getSystemResource(fileName).toURI();
+			URI uriFileName = ClassLoader.getSystemResource(Constants.inputFilePath).toURI();
 			String filePath = Paths.get(uriFileName).toString();
 
 			// read file into stream, try-with-resources
 			try (Stream<String> stream = Files.lines(Paths.get(filePath))) {
-				usersInformation = stream.map(FileUtils::convertLineToArray).collect(Collectors.toList());
+				usersInformation = stream.map(ReadUserInformation::convertLineToArray).collect(Collectors.toList());
 			} catch (InvalidPathException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
@@ -39,8 +41,16 @@ public class FileUtils {
 			e1.printStackTrace();
 		}
 		// return the user information in a Map
-		return usersInformation.stream().collect(Collectors.toMap(e -> e[0], e -> e[1]));
+		ReadUserInformation.usersInformation = usersInformation.stream()
+				.collect(Collectors.toMap(e -> e[0], e -> e[1]));
 
+	}
+
+	static public ReadUserInformation getInstance() {
+		if (instance == null) {
+			instance = new ReadUserInformation();
+		}
+		return instance;
 	}
 
 	// converts each line readed from the file to array
@@ -51,6 +61,14 @@ public class FileUtils {
 
 		return result;
 
+	}
+
+	public static Map<String, String> getUsersInformation() {
+		return usersInformation;
+	}
+
+	public static void setUsersInformation(Map<String, String> usersInformation) {
+		ReadUserInformation.usersInformation = usersInformation;
 	}
 
 }
