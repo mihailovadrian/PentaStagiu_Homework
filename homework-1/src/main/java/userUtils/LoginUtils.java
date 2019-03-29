@@ -1,21 +1,24 @@
 package userUtils;
 
 import java.util.Map;
+import java.util.logging.Logger;
 
 import entity.User;
 
 public class LoginUtils {
-	// check if the user exist in the MAP
+	private final static Logger logger = Logger.getLogger(LoginUtils.class.getName());
+
 	public static boolean checkUser(User user, Map<String, String> infoUsers) {
-		boolean result = false;
 
 		if (user != null && infoUsers.containsKey(user.getUsername())) {
 			if (infoUsers.get(user.getUsername()).equals(user.getPassword())) {
-				result = true;
+				logger.info("Succesfull login !");
+				return true;
 			}
 
 		}
-		return result;
+		logger.info("Wrong Username/Password!");
+		return false;
 
 	}
 }

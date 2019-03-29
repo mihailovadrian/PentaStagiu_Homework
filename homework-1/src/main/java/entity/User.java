@@ -5,8 +5,13 @@ public class User {
 	private String password;
 
 	public User() {
-		this.username="";
-		this.password="";
+		this.username = "";
+		this.password = "";
+	}
+
+	@Override
+	public String toString() {
+		return "User [username=" + username + ", password=" + password + "]";
 	}
 
 	@Override

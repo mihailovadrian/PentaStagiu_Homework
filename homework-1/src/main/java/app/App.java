@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 
 import entity.User;
 import fileUtils.ReadUserInformation;
+import userUtils.AccountUtils;
 import userUtils.LoginUtils;
 
 public class App {
@@ -16,7 +17,7 @@ public class App {
 
 		boolean logedIn = false;
 		boolean exitApp = false;
-		User userToLogIn = new User();
+		User userToLogin = new User();
 
 		String option = null;
 		// try-with-resources
@@ -24,31 +25,42 @@ public class App {
 			if (userInformation != null) {
 				while (!exitApp) {
 					if (!logedIn) {
+						System.out.println("1.Login \n2.Exit");
+						option = scanIn.nextLine();
 
-						System.out.println("User Name: ");
-						userToLogIn.setUsername(scanIn.nextLine());
-						System.out.println("Password: ");
-						userToLogIn.setPassword(scanIn.nextLine());
-
-						if (LoginUtils.checkUser(userToLogIn, ReadUserInformation.getUsersInformation())) {
-							logger.info("Succesfull login !");
-							logedIn = true;
-						} else {
-							logger.info("Wrong username/password");
-						}
-
-					} else {
-						System.out.println("Type -L- if you want to log out OR -X- to Exit: ");
-						option = scanIn.nextLine().toLowerCase();
 						switch (option) {
-						case "l":
-							logedIn = false;
+						case "1":
+							logger.fine("User Name: ");
+							userToLogin.setUsername(scanIn.nextLine());
+							logger.fine("Password: ");
+							userToLogin.setPassword(scanIn.nextLine());
+
+							if (LoginUtils.checkUser(userToLogin, ReadUserInformation.getUsersInformation())) {
+								logedIn = true;
+							}
 							break;
-						case "x":
+						case "2":
 							exitApp = true;
 							break;
 						default:
-							System.out.println("I said -L- \n");
+							logger.fine("Option not avabile.");
+							break;
+
+						}
+					} else {
+						System.out.println("1.Account \n 2.Logout");
+						option = scanIn.nextLine().toLowerCase();
+						switch (option) {
+						case "1":
+							logedIn = AccountUtils.showAccountMenu(userToLogin);
+							break;
+						case "2":
+							logedIn = false;
+							userToLogin = null;
+							break;
+
+						default:
+							logger.fine("Option not avabile.");
 							break;
 
 						}
@@ -56,7 +68,7 @@ public class App {
 				}
 			}
 		} catch (InputMismatchException ex) {
-			ex.printStackTrace();
+			logger.warning(ex.getMessage());
 		}
 	}
 
