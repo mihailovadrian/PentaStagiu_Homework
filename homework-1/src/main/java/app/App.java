@@ -2,12 +2,14 @@ package app;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import java.util.logging.Logger;
 
-import appUtils.LoginUtils;
 import entity.User;
 import fileUtils.ReadUserInformation;
+import userUtils.LoginUtils;
 
 public class App {
+	private final static Logger logger = Logger.getLogger(App.class.getName());
 
 	public static void main(String[] args) {
 		ReadUserInformation userInformation = ReadUserInformation.getInstance();
@@ -29,10 +31,10 @@ public class App {
 						userToLogIn.setPassword(scanIn.nextLine());
 
 						if (LoginUtils.checkUser(userToLogIn, ReadUserInformation.getUsersInformation())) {
-							System.out.println("Welcome user !");
+							logger.info("Succesfull login !");
 							logedIn = true;
 						} else {
-							System.out.println("Wrong username/password");
+							logger.info("Wrong username/password");
 						}
 
 					} else {

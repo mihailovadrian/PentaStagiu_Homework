@@ -1,4 +1,4 @@
-package appUtils;
+package userUtils;
 
 import java.util.Map;
 

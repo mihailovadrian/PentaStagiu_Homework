@@ -9,13 +9,14 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class ReadUserInformation {
 	private static ReadUserInformation instance = null;
 	private static Map<String, String> usersInformation = null;
+	private final static Logger logger = Logger.getLogger(ReadUserInformation.class.getName());
 
 	private ReadUserInformation() {
 
@@ -29,14 +30,14 @@ public class ReadUserInformation {
 			try (Stream<String> stream = Files.lines(Paths.get(filePath))) {
 				usersInformation = stream.map(ReadUserInformation::convertLineToArray).collect(Collectors.toList());
 			} catch (InvalidPathException e) {
-				e.printStackTrace();
+				logger.warning(e.getMessage());
 			} catch (IOException e) {
-				e.printStackTrace();
+				logger.warning(e.getMessage());
 
 			}
 		} catch (URISyntaxException e1) {
 
-			e1.printStackTrace();
+			logger.warning(e1.getMessage());
 		}
 		// return the user information in a Map
 		ReadUserInformation.usersInformation = usersInformation.stream()
@@ -44,7 +45,7 @@ public class ReadUserInformation {
 
 	}
 
-	 public static ReadUserInformation getInstance() {
+	public static ReadUserInformation getInstance() {
 		if (instance == null) {
 			instance = new ReadUserInformation();
 		}
