@@ -7,12 +7,12 @@ import java.util.logging.Logger;
 import entity.User;
 
 public class AccountUtils {
-	private static String option = null;
+	private static String option = "";
 	private final static Logger logger = Logger.getLogger(AccountUtils.class.getName());
 
 	public static boolean showAccountMenu(User user) {
 		try (Scanner scanIn = new Scanner(System.in)) {
-			logger.fine("1.Create Account \n2.Display Account");
+			System.out.println("1.Create Account \n2.Display Account");
 			option = scanIn.nextLine().toLowerCase();
 			switch (option) {
 			case "1":

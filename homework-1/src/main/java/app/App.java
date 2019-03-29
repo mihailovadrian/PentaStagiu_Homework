@@ -30,9 +30,9 @@ public class App {
 
 						switch (option) {
 						case "1":
-							logger.fine("User Name: ");
+							System.out.println("User Name: ");
 							userToLogin.setUsername(scanIn.nextLine());
-							logger.fine("Password: ");
+							System.out.println("Password: ");
 							userToLogin.setPassword(scanIn.nextLine());
 
 							if (LoginUtils.checkUser(userToLogin, ReadUserInformation.getUsersInformation())) {
@@ -49,14 +49,13 @@ public class App {
 						}
 					} else {
 						System.out.println("1.Account \n 2.Logout");
-						option = scanIn.nextLine().toLowerCase();
+						option = scanIn.nextLine();
 						switch (option) {
 						case "1":
 							logedIn = AccountUtils.showAccountMenu(userToLogin);
 							break;
 						case "2":
 							logedIn = false;
-							userToLogin = null;
 							break;
 
 						default:
