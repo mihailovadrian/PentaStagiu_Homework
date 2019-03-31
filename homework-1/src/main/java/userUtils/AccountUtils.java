@@ -45,27 +45,27 @@ public class AccountUtils {
 		String accountNumber = "";
 		boolean informationCorrect = false;
 
-		logger.info("What account type do you want to create ? (Euro/Ron)");
-		option = scanner.nextLine().toLowerCase();
 		while (!informationCorrect) {
+			logger.info("What account type do you want to create ? (Euro/Ron)");
+			option = scanner.nextLine().toLowerCase();
+
 			switch (option) {
 			case "euro":
 				accountNumber = Constants.CURRENCY_EURO;
 				newAccountDetails.setAccountType(Constants.CURRENCY_EURO);
-
 				break;
+
 			case "ron":
 				accountNumber = Constants.CURRENCY_RON;
 				newAccountDetails.setAccountType(Constants.CURRENCY_RON);
-
 				break;
 
 			default:
-				logger.warning("Option not avabile. Try again! ");
+				logger.warning("Account type incorrect !");
 				break;
 
 			}
-			logger.info("Enter your account number ! It will require 22 digits");
+			logger.warning("Enter your account number ! It will require 22 digits/characters");
 			option = scanner.nextLine().toLowerCase();
 
 			if (option.length() == 22) {
@@ -73,10 +73,15 @@ public class AccountUtils {
 				newAccountDetails.setAccountNumber(String.valueOf(accountNumber));
 				newAccountDetails.setUsername(user.getUsername());
 
-			}
-			if (accountNumber.length() == 24)
+			} else
+				logger.warning("Not enough characters !");
+			// condition to check if account information are correct , else we repeat
+			// reading information from the console
+			if (accountNumber.length() == 24 && (accountNumber.substring(0, 2).equals(Constants.CURRENCY_EURO)
+					|| accountNumber.substring(0, 2).equals(Constants.CURRENCY_RON))) {
 				informationCorrect = true;
-			logger.warning("Informations are correct !");
+				logger.info("Informations are correct !");
+			}
 		}
 		if (newAccountDetails != null)
 			accountDetails.add(newAccountDetails);

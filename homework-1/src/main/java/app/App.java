@@ -48,11 +48,11 @@ public class App {
 
 						}
 					} else {
-						System.out.println("1.Account \n 2.Logout");
+						System.out.println("1.Account \n2.Logout");
 						option = scanIn.nextLine();
 						switch (option) {
 						case "1":
-							logedIn = AccountUtils.showAccountMenu(userToLogin,scanIn);
+							logedIn = AccountUtils.showAccountMenu(userToLogin, scanIn);
 							break;
 						case "2":
 							logedIn = false;
