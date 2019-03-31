@@ -26,9 +26,8 @@ public class AccountUtils {
 				return true;
 		case "2":
 			for (AccountDetails account : accountDetails) {
-				System.out.println(account.getUsername().toString());
-				System.out.println(user.getUsername());
-				if (account.getUsername() == user.getUsername()) {
+
+				if (account.getUsername().equals(user.getUsername())) {
 					System.out.println(account.toString());
 				}
 			}
@@ -43,20 +42,20 @@ public class AccountUtils {
 
 	private static boolean createNewAccount(User user, List<AccountDetails> accountDetails, Scanner scanner) {
 		AccountDetails newAccountDetails = new AccountDetails();
-		StringBuilder accountNumber = new StringBuilder();
-		boolean informationCorrect = true;
+		String accountNumber = "";
+		boolean informationCorrect = false;
 
 		logger.info("What account type do you want to create ? (Euro/Ron)");
 		option = scanner.nextLine().toLowerCase();
-		while (informationCorrect) {
+		while (!informationCorrect) {
 			switch (option) {
 			case "euro":
-				accountNumber.append(Constants.CURRENCY_EURO);
+				accountNumber = Constants.CURRENCY_EURO;
 				newAccountDetails.setAccountType(Constants.CURRENCY_EURO);
 
 				break;
 			case "ron":
-				accountNumber.append(Constants.CURRENCY_RON);
+				accountNumber = Constants.CURRENCY_RON;
 				newAccountDetails.setAccountType(Constants.CURRENCY_RON);
 
 				break;
@@ -70,13 +69,14 @@ public class AccountUtils {
 			option = scanner.nextLine().toLowerCase();
 
 			if (option.length() == 22) {
-				accountNumber.append(option);
+				accountNumber += option;
 				newAccountDetails.setAccountNumber(String.valueOf(accountNumber));
 				newAccountDetails.setUsername(user.getUsername());
-				informationCorrect = false;
+
 			}
-			if (accountNumber == null)
-				informationCorrect = false;
+			if (accountNumber.length() == 24)
+				informationCorrect = true;
+			logger.warning("Informations are correct !");
 		}
 		if (newAccountDetails != null)
 			accountDetails.add(newAccountDetails);
