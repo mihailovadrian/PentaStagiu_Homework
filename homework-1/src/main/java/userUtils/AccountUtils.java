@@ -17,9 +17,11 @@ public class AccountUtils {
 	public static boolean showAccountMenu(User user, Scanner scanner) {
 		AccountDetailsTools tools = AccountDetailsTools.getInstance();
 		accountDetails = AccountDetailsTools.getResult();
+		// Account Menu
 		if (tools != null) {
 			System.out.println("1.Create Account \n2.Display Account");
 			option = scanner.nextLine().toLowerCase();
+
 			switch (option) {
 			case "1":
 				if (createNewAccount(user, accountDetails, scanner))
@@ -77,6 +79,7 @@ public class AccountUtils {
 
 			} else
 				logger.warning("Not enough characters !");
+
 			// condition to check if account information are correct , else we repeat
 			// reading information from the console
 			if (accountNumber.length() == 24 && (accountNumber.substring(0, 2).equals(Constants.CURRENCY_EURO)
