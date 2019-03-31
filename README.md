@@ -1,8 +1,15 @@
 # PentaStagiu_Homework
 -Project/Homework Pentastagiu 
--Bank account
-The application performs the following banking functions :
+# Banking Accounts
 
- *Login/Logout using existing credentials.
- *Checking your accounts
- *Creating a new account
+The application can be used to manage clients accounts in a bank
+
+##  Existing functionalities 
+
+```
+-Creating a new account (for deposit/withdraw money)
+-Chechking your accounts
+-Login/Logout using existig credentials 
+```
+
+
