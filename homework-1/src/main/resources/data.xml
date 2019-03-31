@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="1.8.0_191" class="java.beans.XMLDecoder">
+ <object class="java.util.ArrayList">
+  <void method="add">
+   <object class="entity.AccountDetails">
+    <void property="accountNumber">
+     <string>RO1122334455667788990011</string>
+    </void>
+    <void property="accountType">
+     <string>RO</string>
+    </void>
+    <void property="username">
+     <string>mihailov</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="entity.AccountDetails">
+    <void property="accountNumber">
+     <string>RO1234567890123456789012</string>
+    </void>
+    <void property="accountType">
+     <string>RO</string>
+    </void>
+    <void property="username">
+     <string>mihailov</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="entity.AccountDetails">
+    <void property="accountNumber">
+     <string>EU1122334455667788990011</string>
+    </void>
+    <void property="accountType">
+     <string>EU</string>
+    </void>
+    <void property="username">
+     <string>da</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="entity.AccountDetails">
+    <void property="accountNumber">
+     <string>EU1234567890123456789012</string>
+    </void>
+    <void property="accountType">
+     <string>EU</string>
+    </void>
+    <void property="username">
+     <string>da</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="entity.AccountDetails">
+    <void property="accountNumber">
+     <string>1122334455667788990011</string>
+    </void>
+    <void property="username">
+     <string>da</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="entity.AccountDetails">
+    <void property="accountNumber">
+     <string>EU0099887766554433221111</string>
+    </void>
+    <void property="accountType">
+     <string>EU</string>
+    </void>
+    <void property="username">
+     <string>mihailov</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="entity.AccountDetails">
+    <void property="accountNumber">
+     <string>EU9900887766554433221122</string>
+    </void>
+    <void property="accountType">
+     <string>EU</string>
+    </void>
+    <void property="username">
+     <string>mihailov</string>
+    </void>
+   </object>
+  </void>
+ </object>
+</java>

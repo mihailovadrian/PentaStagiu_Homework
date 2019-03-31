@@ -37,6 +37,7 @@ public class AccountUtils {
 			return true;
 
 		}
+		
 
 	}
 
@@ -65,7 +66,7 @@ public class AccountUtils {
 				break;
 
 			}
-			logger.warning("Enter your account number ! It will require 22 digits/characters");
+			logger.info("Enter your account number ! It will require 22 digits/characters");
 			option = scanner.nextLine().toLowerCase();
 
 			if (option.length() == 22) {
