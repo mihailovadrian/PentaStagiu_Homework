@@ -52,7 +52,7 @@ public class App {
 						option = scanIn.nextLine();
 						switch (option) {
 						case "1":
-							logedIn = AccountUtils.showAccountMenu(userToLogin);
+							logedIn = AccountUtils.showAccountMenu(userToLogin,scanIn);
 							break;
 						case "2":
 							logedIn = false;

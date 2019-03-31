@@ -8,11 +8,19 @@ public class AccountDetails {
 	private BigDecimal balance;
 	private String accountType;
 
-	public AccountDetails(String accountNumber, String username, BigDecimal balance, String accountType) {
+	public AccountDetails() {
+
+		this.accountNumber = "";
+		this.username = "";
+		this.balance = new BigDecimal("0.0");
+		this.accountType = "";
+	}
+
+	public AccountDetails(String accountNumber, String username, double balance, String accountType) {
 
 		this.accountNumber = accountNumber;
 		this.username = username;
-		this.balance = balance;
+		this.balance = new BigDecimal(balance);
 		this.accountType = accountType;
 	}
 

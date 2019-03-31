@@ -31,7 +31,7 @@ public class AccountDetailsTools {
 			logger.warning(e1.getMessage());
 		}
 		String filePath = Paths.get(uriFileName).toString();
-		try (XMLDecoder xmlDecoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(filePath)));) {
+		try (XMLDecoder xmlDecoder = new XMLDecoder(new BufferedInputStream(new FileInputStream("D:\\data.xml")));) {
 
 			result = (List<AccountDetails>) xmlDecoder.readObject();
 
@@ -51,7 +51,7 @@ public class AccountDetailsTools {
 			logger.warning(e1.getMessage());
 		}
 		String filePath = Paths.get(uriFileName).toString();
-		try (XMLEncoder x = new XMLEncoder(new BufferedOutputStream(new FileOutputStream(filePath)));) {
+		try (XMLEncoder x = new XMLEncoder(new BufferedOutputStream(new FileOutputStream("D:\\data.xml")));) {
 			x.writeObject(accountDetails);
 			return true;
 
