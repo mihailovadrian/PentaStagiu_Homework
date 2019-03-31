@@ -17,41 +17,37 @@ import java.util.logging.Logger;
 import entity.AccountDetails;
 
 public class AccountDetailsTools {
-	private static List<AccountDetails> result;
+	private static List<AccountDetails> resultAccountDetails;
 	private final static Logger logger = Logger.getLogger(AccountDetailsTools.class.getName());
-	private static URI uriFileName = null;
+	private static String filePath = null;
+	private static AccountDetailsTools instance = null;
+
+	private AccountDetailsTools() {
+		filePath = xmlFilePath();
+		resultAccountDetails = readAccountDetailsXML();
+	}
 
 	@SuppressWarnings("unchecked")
-	public static List<AccountDetails> readAccountDetailsXML() {
-		result = new ArrayList<AccountDetails>();
+	private static List<AccountDetails> readAccountDetailsXML() {
+		resultAccountDetails = new ArrayList<AccountDetails>();
 
-		try {
-			uriFileName = ClassLoader.getSystemResource(Constants.ACCOUNT_DETAILS_XML).toURI();
-		} catch (URISyntaxException e1) {
-			logger.warning(e1.getMessage());
-		}
-		String filePath = Paths.get(uriFileName).toString();
+		filePath = xmlFilePath();
 		logger.info("path xml : " + filePath);
 		try (XMLDecoder xmlDecoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(filePath)));) {
 
-			result = (List<AccountDetails>) xmlDecoder.readObject();
+			resultAccountDetails = (List<AccountDetails>) xmlDecoder.readObject();
 
 		} catch (FileNotFoundException e) {
 
 			logger.warning(e.getMessage());
 		}
 
-		return result;
+		return resultAccountDetails;
 	}
 
 	public static Boolean writeAccountDetailsToXML(List<AccountDetails> accountDetails) {
 
-		try {
-			uriFileName = ClassLoader.getSystemResource(Constants.ACCOUNT_DETAILS_XML).toURI();
-		} catch (URISyntaxException e1) {
-			logger.warning(e1.getMessage());
-		}
-		String filePath = Paths.get(uriFileName).toString();
+		filePath = xmlFilePath();
 		logger.info("path xml : " + filePath);
 		try (XMLEncoder x = new XMLEncoder(new BufferedOutputStream(new FileOutputStream(filePath)));) {
 			x.writeObject(accountDetails);
@@ -63,6 +59,31 @@ public class AccountDetailsTools {
 		}
 
 		return false;
+	}
+
+	private static String xmlFilePath() {
+		URI uriFileName = null;
+		try {
+			uriFileName = ClassLoader.getSystemResource(Constants.ACCOUNT_DETAILS_XML).toURI();
+		} catch (URISyntaxException e1) {
+			logger.warning(e1.getMessage());
+		}
+		return Paths.get(uriFileName).toString();
+	}
+
+	public static AccountDetailsTools getInstance() {
+		if (instance == null) {
+			instance = new AccountDetailsTools();
+		}
+		return instance;
+	}
+
+	public static List<AccountDetails> getResult() {
+		return resultAccountDetails;
+	}
+
+	public static void setResult(List<AccountDetails> result) {
+		AccountDetailsTools.resultAccountDetails = result;
 	}
 
 }

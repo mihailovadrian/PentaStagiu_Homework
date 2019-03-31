@@ -15,29 +15,30 @@ public class AccountUtils {
 	private static List<AccountDetails> accountDetails;
 
 	public static boolean showAccountMenu(User user, Scanner scanner) {
+		AccountDetailsTools tools = AccountDetailsTools.getInstance();
+		accountDetails = AccountDetailsTools.getResult();
+		if (tools != null) {
+			System.out.println("1.Create Account \n2.Display Account");
+			option = scanner.nextLine().toLowerCase();
+			switch (option) {
+			case "1":
+				if (createNewAccount(user, accountDetails, scanner))
+					return true;
+			case "2":
+				for (AccountDetails account : accountDetails) {
 
-		accountDetails = AccountDetailsTools.readAccountDetailsXML();
-
-		System.out.println("1.Create Account \n2.Display Account");
-		option = scanner.nextLine().toLowerCase();
-		switch (option) {
-		case "1":
-			if (createNewAccount(user, accountDetails, scanner))
-				return true;
-		case "2":
-			for (AccountDetails account : accountDetails) {
-
-				if (account.getUsername().equals(user.getUsername())) {
-					System.out.println(account.toString());
+					if (account.getUsername().equals(user.getUsername())) {
+						System.out.println(account.toString());
+					}
 				}
-			}
-			return true;
-		default:
-			logger.fine("Option not avabile.");
-			return true;
+				return true;
+			default:
+				logger.fine("Option not avabile.");
+				return true;
 
+			}
 		}
-		
+		return false;
 
 	}
 
