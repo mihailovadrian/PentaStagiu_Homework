@@ -2,6 +2,7 @@ package app;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import entity.User;
@@ -10,7 +11,7 @@ import userUtils.AccountUtils;
 import userUtils.LoginUtils;
 
 public class App {
-	private final static Logger logger = Logger.getLogger(App.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(App.class.getName());
 
 	public static void main(String[] args) {
 		ReadUserInformation userInformation = ReadUserInformation.getInstance();
@@ -35,7 +36,7 @@ public class App {
 							System.out.println("Password: ");
 							userToLogin.setPassword(scanIn.nextLine());
 
-							if (LoginUtils.checkUser(userToLogin, ReadUserInformation.getUsersInformation())) {
+							if (LoginUtils.checkUser(userToLogin, userInformation.getUsersInformation())) {
 								logedIn = true;
 							}
 							break;
@@ -43,7 +44,7 @@ public class App {
 							exitApp = true;
 							break;
 						default:
-							logger.fine("Option not avabile.");
+							LOGGER.warning("Option not avabile.");
 							break;
 
 						}
@@ -59,7 +60,7 @@ public class App {
 							break;
 
 						default:
-							logger.fine("Option not avabile.");
+							LOGGER.warning("Option not avabile.");
 							break;
 
 						}
@@ -67,7 +68,7 @@ public class App {
 				}
 			}
 		} catch (InputMismatchException ex) {
-			logger.warning(ex.getMessage());
+			LOGGER.log(Level.SEVERE, "Exception occur ", ex);
 		}
 	}
 

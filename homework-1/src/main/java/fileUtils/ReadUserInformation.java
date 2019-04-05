@@ -9,18 +9,20 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class ReadUserInformation {
+	private static final Logger LOGGER = Logger.getLogger(ReadUserInformation.class.getName());
+
 	private static ReadUserInformation instance = null;
-	private static Map<String, String> usersInformation = null;
-	private final static Logger logger = Logger.getLogger(ReadUserInformation.class.getName());
+	private Map<String, String> usersInformation = null;
 
 	private ReadUserInformation() {
 
-		List<String[]> usersInformation = new ArrayList<String[]>();
+		List<String[]> informationFromFile = new ArrayList<String[]>();
 
 		try {
 			URI uriFileName = ClassLoader.getSystemResource(Constants.INPUT_USER_INFORMATION_FILE).toURI();
@@ -28,20 +30,19 @@ public class ReadUserInformation {
 
 			// read file into stream, try-with-resources
 			try (Stream<String> stream = Files.lines(Paths.get(filePath))) {
-				usersInformation = stream.map(ReadUserInformation::convertLineToArray).collect(Collectors.toList());
+				informationFromFile = stream.map(ReadUserInformation::convertLineToArray).collect(Collectors.toList());
 			} catch (InvalidPathException e) {
-				logger.warning(e.getMessage());
+				LOGGER.log(Level.SEVERE, "Exception occur ", e);
 			} catch (IOException e) {
-				logger.warning(e.getMessage());
+				LOGGER.log(Level.SEVERE, "Exception occur ", e);
 
 			}
 		} catch (URISyntaxException e1) {
 
-			logger.warning(e1.getMessage());
+			LOGGER.log(Level.SEVERE, "Exception occur ", e1);
 		}
 		// return the user information in a Map
-		ReadUserInformation.usersInformation = usersInformation.stream()
-				.collect(Collectors.toMap(e -> e[0], e -> e[1]));
+		this.setUsersInformation(informationFromFile.stream().collect(Collectors.toMap(e -> e[0], e -> e[1])));
 
 	}
 
@@ -52,7 +53,7 @@ public class ReadUserInformation {
 		return instance;
 	}
 
-	// converts each line readed from the file to array
+	// converts each line from the file to array
 	private static String[] convertLineToArray(String line) {
 		String[] result = null;
 
@@ -62,12 +63,12 @@ public class ReadUserInformation {
 
 	}
 
-	public static Map<String, String> getUsersInformation() {
+	public Map<String, String> getUsersInformation() {
 		return usersInformation;
 	}
 
-	public static void setUsersInformation(Map<String, String> usersInformation) {
-		ReadUserInformation.usersInformation = usersInformation;
+	public void setUsersInformation(Map<String, String> usersInformation) {
+		this.usersInformation = usersInformation;
 	}
 
 }

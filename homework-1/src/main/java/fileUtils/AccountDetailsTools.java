@@ -12,61 +12,64 @@ import java.net.URISyntaxException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import entity.AccountDetails;
 
 public class AccountDetailsTools {
-	private static List<AccountDetails> resultAccountDetails;
-	private final static Logger logger = Logger.getLogger(AccountDetailsTools.class.getName());
-	private static String filePath = null;
+	private List<AccountDetails> resultAccountDetails;
+	private String filePath = null;
+
+	private static final Logger LOGGER = Logger.getLogger(AccountDetailsTools.class.getName());
 	private static AccountDetailsTools instance = null;
 
 	private AccountDetailsTools() {
-		filePath = xmlFilePath();
-		resultAccountDetails = readAccountDetailsXML();
+		this.filePath = xmlFilePath();
+		this.resultAccountDetails = readAccountDetailsXML();
 	}
 
 	@SuppressWarnings("unchecked")
-	private static List<AccountDetails> readAccountDetailsXML() {
-		resultAccountDetails = new ArrayList<AccountDetails>();
+	private List<AccountDetails> readAccountDetailsXML() {
+		this.resultAccountDetails = new ArrayList<AccountDetails>();
 
-		filePath = xmlFilePath();
-		logger.info("path xml : " + filePath);
+		LOGGER.info("path xml : " + filePath);
 		try (XMLDecoder xmlDecoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(filePath)));) {
 
 			resultAccountDetails = (List<AccountDetails>) xmlDecoder.readObject();
 
 		} catch (FileNotFoundException e) {
 
-			logger.warning(e.getMessage());
+			LOGGER.log(Level.SEVERE, "Exception occur ", e);
+
 		}
 
 		return resultAccountDetails;
 	}
 
-	public static Boolean writeAccountDetailsToXML(List<AccountDetails> accountDetails) {
+	public Boolean writeAccountDetailsToXML(List<AccountDetails> accountDetails) {
 
-		filePath = xmlFilePath();
-		logger.info("path xml : " + filePath);
+		LOGGER.info("path xml : " + filePath);
 		try (XMLEncoder x = new XMLEncoder(new BufferedOutputStream(new FileOutputStream(filePath)));) {
 			x.writeObject(accountDetails);
 			return true;
 
 		} catch (FileNotFoundException e) {
 
-			e.printStackTrace();
+			LOGGER.log(Level.SEVERE, "Exception occur ", e);
+
 		}
 
 		return false;
 	}
 
-	private static String xmlFilePath() {
+	private String xmlFilePath() {
 		URI uriFileName = null;
 		try {
 			uriFileName = ClassLoader.getSystemResource(Constants.ACCOUNT_DETAILS_XML).toURI();
 		} catch (URISyntaxException e1) {
-			logger.warning(e1.getMessage());
+			LOGGER.log(Level.SEVERE, "Exception occur ", e1);
+
 		}
 		return Paths.get(uriFileName).toString();
 	}
@@ -78,12 +81,12 @@ public class AccountDetailsTools {
 		return instance;
 	}
 
-	public static List<AccountDetails> getResult() {
+	public List<AccountDetails> getResultAccountDetails() {
 		return resultAccountDetails;
 	}
 
-	public static void setResult(List<AccountDetails> result) {
-		AccountDetailsTools.resultAccountDetails = result;
+	public void setResultAccountDetails(List<AccountDetails> resultAccountDetails) {
+		this.resultAccountDetails = resultAccountDetails;
 	}
 
 }

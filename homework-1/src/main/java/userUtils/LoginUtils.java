@@ -17,7 +17,7 @@ public class LoginUtils {
 			}
 
 		}
-		logger.info("Wrong Username/Password!");
+		logger.warning("Wrong Username/Password!");
 		return false;
 
 	}

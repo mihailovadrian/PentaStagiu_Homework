@@ -24,55 +24,6 @@ public class AccountDetails {
 		this.accountType = accountType;
 	}
 
-	@Override
-	public String toString() {
-		return "AccountDetails [accountNumber=" + accountNumber + ", username=" + username + ", balance=" + balance
-				+ ", accountType=" + accountType + "]";
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((accountNumber == null) ? 0 : accountNumber.hashCode());
-		result = prime * result + ((accountType == null) ? 0 : accountType.hashCode());
-		result = prime * result + ((balance == null) ? 0 : balance.hashCode());
-		result = prime * result + ((username == null) ? 0 : username.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		AccountDetails other = (AccountDetails) obj;
-		if (accountNumber == null) {
-			if (other.accountNumber != null)
-				return false;
-		} else if (!accountNumber.equals(other.accountNumber))
-			return false;
-		if (accountType == null) {
-			if (other.accountType != null)
-				return false;
-		} else if (!accountType.equals(other.accountType))
-			return false;
-		if (balance == null) {
-			if (other.balance != null)
-				return false;
-		} else if (!balance.equals(other.balance))
-			return false;
-		if (username == null) {
-			if (other.username != null)
-				return false;
-		} else if (!username.equals(other.username))
-			return false;
-		return true;
-	}
-
 	public String getAccountNumber() {
 		return accountNumber;
 	}
@@ -105,4 +56,47 @@ public class AccountDetails {
 		this.accountType = accountType;
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		AccountDetails other = (AccountDetails) obj;
+		if (accountNumber == null) {
+			if (other.accountNumber != null)
+				return false;
+		} else if (!accountNumber.equals(other.accountNumber))
+			return false;
+		if (accountType == null) {
+			if (other.accountType != null)
+				return false;
+		} else if (!accountType.equals(other.accountType))
+			return false;
+		if (username == null) {
+			if (other.username != null)
+				return false;
+		} else if (!username.equals(other.username))
+			return false;
+		return true;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((accountNumber == null) ? 0 : accountNumber.hashCode());
+		result = prime * result + ((accountType == null) ? 0 : accountType.hashCode());
+		result = prime * result + ((balance == null) ? 0 : balance.hashCode());
+		result = prime * result + ((username == null) ? 0 : username.hashCode());
+		return result;
+	}
+
+	@Override
+	public String toString() {
+		return "Account Details --> Account Number=" + accountNumber + " of the  username :" + username + "\n Balance : " + balance
+				+ ", account type :" + accountType+"\n";
+	}
 }
