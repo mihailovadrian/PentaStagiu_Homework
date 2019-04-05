@@ -15,43 +15,39 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import entity.AccountDetails;
-
-public class AccountDetailsTools {
-	private List<AccountDetails> resultAccountDetails;
+public class ReadWriteXMLTools<T> {
+	private List<T> result;
 	private String filePath = null;
 
-	private static final Logger LOGGER = Logger.getLogger(AccountDetailsTools.class.getName());
-	private static AccountDetailsTools instance = null;
+	private static final Logger LOGGER = Logger.getLogger(ReadWriteXMLTools.class.getName());
 
-	private AccountDetailsTools() {
-		this.filePath = xmlFilePath();
-		this.resultAccountDetails = readAccountDetailsXML();
+	public ReadWriteXMLTools(String filePath) {
+		this.filePath = xmlFilePath(filePath);
+		this.result = readInformationFromXML();
 	}
 
 	@SuppressWarnings("unchecked")
-	private List<AccountDetails> readAccountDetailsXML() {
-		this.resultAccountDetails = new ArrayList<AccountDetails>();
+	private List<T> readInformationFromXML() {
+		this.result = new ArrayList<T>();
 
 		LOGGER.info("path xml : " + filePath);
 		try (XMLDecoder xmlDecoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(filePath)));) {
 
-			resultAccountDetails = (List<AccountDetails>) xmlDecoder.readObject();
+			result = (List<T>) xmlDecoder.readObject();
 
 		} catch (FileNotFoundException e) {
 
 			LOGGER.log(Level.SEVERE, "Exception occur ", e);
 
 		}
-
-		return resultAccountDetails;
+		return result;
 	}
 
-	public Boolean writeAccountDetailsToXML(List<AccountDetails> accountDetails) {
+	public Boolean writeAccountDetailsToXML(List<T> informationToSave) {
 
 		LOGGER.info("path xml : " + filePath);
 		try (XMLEncoder x = new XMLEncoder(new BufferedOutputStream(new FileOutputStream(filePath)));) {
-			x.writeObject(accountDetails);
+			x.writeObject(informationToSave);
 			return true;
 
 		} catch (FileNotFoundException e) {
@@ -63,10 +59,10 @@ public class AccountDetailsTools {
 		return false;
 	}
 
-	private String xmlFilePath() {
+	private String xmlFilePath(String filePath) {
 		URI uriFileName = null;
 		try {
-			uriFileName = ClassLoader.getSystemResource(Constants.ACCOUNT_DETAILS_XML).toURI();
+			uriFileName = ClassLoader.getSystemResource(filePath).toURI();
 		} catch (URISyntaxException e1) {
 			LOGGER.log(Level.SEVERE, "Exception occur ", e1);
 
@@ -74,19 +70,12 @@ public class AccountDetailsTools {
 		return Paths.get(uriFileName).toString();
 	}
 
-	public static AccountDetailsTools getInstance() {
-		if (instance == null) {
-			instance = new AccountDetailsTools();
-		}
-		return instance;
+	public List<T> getInformationResult() {
+		return result;
 	}
 
-	public List<AccountDetails> getResultAccountDetails() {
-		return resultAccountDetails;
-	}
-
-	public void setResultAccountDetails(List<AccountDetails> resultAccountDetails) {
-		this.resultAccountDetails = resultAccountDetails;
+	public void setInformationResult(List<T> informationList) {
+		this.result = informationList;
 	}
 
 }

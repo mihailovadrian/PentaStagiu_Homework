@@ -40,12 +40,17 @@ public class AccountDetails {
 		this.username = username;
 	}
 
-	public BigDecimal getBalance() {
+	// for saving to xml , xmlEncoder doesn t know to save as bigdecimal
+	public String getBalance() {
+		return balance.toString();
+	}
+
+	public BigDecimal getBalanceDecimal() {
 		return balance;
 	}
 
-	public void setBalance(BigDecimal balance) {
-		this.balance = balance;
+	public void setBalance(String balance) {
+		this.balance = new BigDecimal(balance);
 	}
 
 	public String getAccountType() {
@@ -96,7 +101,7 @@ public class AccountDetails {
 
 	@Override
 	public String toString() {
-		return "Account Details --> Account Number=" + accountNumber + " of the  username :" + username + "\n Balance : " + balance
-				+ ", account type :" + accountType+"\n";
+		return "Account Details --> Account Number=" + accountNumber + " of the  username :" + username
+				+ "\n Balance : " + balance + ", account type :" + accountType + "\n";
 	}
 }

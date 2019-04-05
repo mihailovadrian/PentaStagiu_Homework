@@ -1,6 +1,7 @@
 package userUtils;
 
-import java.util.Map;
+import java.util.List;
+
 import java.util.logging.Logger;
 
 import entity.User;
@@ -8,14 +9,11 @@ import entity.User;
 public class LoginUtils {
 	private final static Logger logger = Logger.getLogger(LoginUtils.class.getName());
 
-	public static boolean checkUser(User user, Map<String, String> infoUsers) {
+	public static boolean checkUser(User user, List<User> users) {
 
-		if (user != null && infoUsers.containsKey(user.getUsername())) {
-			if (infoUsers.get(user.getUsername()).equals(user.getPassword())) {
-				logger.info("Succesfull login !");
+		for (User u : users) {
+			if (u.equals(user))
 				return true;
-			}
-
 		}
 		logger.warning("Wrong Username/Password!");
 		return false;
