@@ -10,13 +10,14 @@ import java.util.logging.Level;
 
 import java.util.logging.Logger;
 
-import ReadWriteXMLTools.ReadWriteXMLTools;
 import entity.AccountDetails;
 
 import entity.User;
 
 import fileUtils.Constants;
+import fileUtils.ReadWriteXMLTools;
 import menus.AccountMenu;
+import menus.PaymentMenu;
 import userUtils.LoginUtils;
 
 public class App {
@@ -25,7 +26,7 @@ public class App {
 
 	public static void main(String[] args) {
 
-		boolean logedIn = false;
+		boolean logged = false;
 
 		boolean exitApp = false;
 
@@ -49,7 +50,7 @@ public class App {
 
 			while (!exitApp) {
 
-				if (!logedIn) {
+				if (!logged) {
 
 					System.out.println("1.Login \n2.Exit");
 
@@ -69,7 +70,7 @@ public class App {
 
 						if (LoginUtils.checkUser(userToLogin, users)) {
 
-							logedIn = true;
+							logged = true;
 
 							userAccountDetails = AccountMenu.getUserAccounts(userToLogin, accountDetails);
 
@@ -101,19 +102,19 @@ public class App {
 
 					case "1":
 
-						logedIn = AccountMenu.showAccountMenu(userToLogin, scanIn, accountDetails);
+						logged = AccountMenu.showAccountMenu(userToLogin, scanIn, accountDetails);
 
 						break;
 
 					case "2":
-
-						System.out.println(userAccountDetails.toString());
+						PaymentMenu paymenu = new PaymentMenu(userAccountDetails);
+						logged = paymenu.showPaymentMenu(scanIn);
 
 						break;
 
 					case "3":
 
-						logedIn = false;
+						logged = false;
 
 						break;
 

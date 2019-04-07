@@ -1,4 +1,4 @@
-package ReadWriteXMLTools;
+package fileUtils;
 import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
 import java.io.BufferedInputStream;

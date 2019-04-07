@@ -6,10 +6,10 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import ReadWriteXMLTools.ReadWriteXMLTools;
 import entity.AccountDetails;
 import entity.User;
 import fileUtils.Constants;
+import fileUtils.ReadWriteXMLTools;
 
 
 public class AccountMenu {
