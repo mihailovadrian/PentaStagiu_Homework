@@ -52,6 +52,7 @@ public class AccountDetails {
 	public void setBalance(String balance) {
 		this.balance = new BigDecimal(balance);
 	}
+
 	public void setBalance(BigDecimal balance) {
 		this.balance = balance;
 	}

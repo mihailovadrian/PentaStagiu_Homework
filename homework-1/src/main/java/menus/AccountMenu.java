@@ -8,8 +8,8 @@ import java.util.logging.Logger;
 
 import entity.AccountDetails;
 import entity.User;
-import fileUtils.ReadWriteXMLTools;
 import fileUtils.Constants;
+import fileUtils.ReadWriteXMLTools;
 
 public class AccountMenu {
 	private static String option = null;
