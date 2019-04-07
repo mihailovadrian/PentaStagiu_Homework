@@ -1,4 +1,4 @@
-package entity;
+package com.pentalog.stagiu.entity;
 
 import java.math.BigDecimal;
 

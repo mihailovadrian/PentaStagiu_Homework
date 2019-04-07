@@ -1,4 +1,4 @@
-package menus;
+package com.pentalog.stagiu.menus;
 
 import java.math.BigDecimal;
 import java.util.List;

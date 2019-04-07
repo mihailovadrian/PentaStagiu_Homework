@@ -1,4 +1,4 @@
-package fileUtils;
+package com.pentalog.stagiu.fileUtils;
 
 import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;

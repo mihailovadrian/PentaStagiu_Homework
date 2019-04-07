@@ -1,7 +1,2 @@
 /.settings
-/target/classes/app
-/target/classes/entity
-/target/classes/fileUtils
-/target/classes/menus
-/target/classes/userUtils
 *.project

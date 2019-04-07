@@ -1,4 +1,4 @@
-package userUtils;
+package com.pentalog.stagiu.userUtils;
 
 import java.util.List;
 
