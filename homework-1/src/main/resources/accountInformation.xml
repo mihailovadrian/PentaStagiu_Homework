@@ -6,14 +6,30 @@
     <void property="accountNumber">
      <string>EU0099887766554433221133</string>
     </void>
+    <void property="accountType">
+     <string>EU</string>
+    </void>
+    <void property="balance">
+     <string>999</string>
+    </void>
     <void property="username">
      <string>mihailov</string>
     </void>
-	  <void property="balance">
-     <string>999</string>
+   </object>
+  </void>
+  <void method="add">
+   <object class="entity.AccountDetails">
+    <void property="accountNumber">
+     <string>EUxxcc3344556677889900zz</string>
     </void>
-	  <void property="accountType">
+    <void property="accountType">
      <string>EU</string>
+    </void>
+    <void property="balance">
+     <string>987</string>
+    </void>
+    <void property="username">
+     <string>mihailov</string>
     </void>
    </object>
   </void>

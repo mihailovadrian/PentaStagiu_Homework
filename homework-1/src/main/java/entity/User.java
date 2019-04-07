@@ -1,4 +1,4 @@
-package com.pentalog.stagiu.entity;
+package entity;
 
 public class User {
 	private String username;

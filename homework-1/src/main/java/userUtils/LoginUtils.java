@@ -1,11 +1,10 @@
-package com.pentalog.stagiu.userUtils;
+package userUtils;
 
 import java.util.List;
 
 import java.util.logging.Logger;
 
-import com.pentalog.stagiu.entity.User;
-
+import entity.User;
 
 public class LoginUtils {
 	private final static Logger logger = Logger.getLogger(LoginUtils.class.getName());

@@ -1,4 +1,4 @@
-package com.pentalog.stagiu.fileUtils;
+package fileUtils;
 
 public class Constants {
 	public static final String INPUT_FILE_SEPARATOR = " ";

@@ -1,4 +1,4 @@
-package com.pentalog.stagiu.menus;
+package menus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,10 +6,11 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.pentalog.stagiu.entity.AccountDetails;
-import com.pentalog.stagiu.entity.User;
-import com.pentalog.stagiu.fileUtils.Constants;
-import com.pentalog.stagiu.fileUtils.ReadWriteXMLTools;
+import ReadWriteXMLTools.ReadWriteXMLTools;
+import entity.AccountDetails;
+import entity.User;
+import fileUtils.Constants;
+
 
 public class AccountMenu {
 	private static String option = null;

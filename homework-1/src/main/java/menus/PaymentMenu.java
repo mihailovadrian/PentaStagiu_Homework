@@ -1,11 +1,11 @@
-package com.pentalog.stagiu.menus;
+package menus;
 
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Scanner;
 import java.util.logging.Logger;
 
-import com.pentalog.stagiu.entity.AccountDetails;
+import entity.AccountDetails;
 
 public class PaymentMenu {
 
@@ -58,7 +58,7 @@ public class PaymentMenu {
 					accountToTransfer.setBalance(accountToTransfer.getBalanceDecimal().add(addResult));
 				} else {
 					accountToTransfer.setBalance(oldBalance);
-					return invalidInputMessage("You can transfer to the same account / or different account type");
+					return invalidInputMessage("You can transfer to the same account");
 				}
 			} else
 				return invalidInputMessage("Invalid option");

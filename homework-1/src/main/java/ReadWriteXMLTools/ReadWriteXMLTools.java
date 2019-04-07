@@ -1,5 +1,4 @@
-package com.pentalog.stagiu.fileUtils;
-
+package ReadWriteXMLTools;
 import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
 import java.io.BufferedInputStream;
