@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.logging.Logger;
 
-import entity.AccountDetails;
+import com.pentalog.stagiu.entity.AccountDetails;
 
 public class PaymentMenu {
 

@@ -6,13 +6,14 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import entity.AccountDetails;
-import entity.User;
-import fileUtils.Constants;
-import fileUtils.ReadWriteXMLTools;
-import menus.AccountMenu;
-import menus.PaymentMenu;
-import userUtils.LoginUtils;
+import com.pentalog.stagiu.entity.AccountDetails;
+import com.pentalog.stagiu.entity.*;
+import com.pentalog.stagiu.fileUtils.Constants;
+import com.pentalog.stagiu.fileUtils.ReadWriteXMLTools;
+import com.pentalog.stagiu.menus.AccountMenu;
+import com.pentalog.stagiu.menus.PaymentMenu;
+import com.pentalog.stagiu.userUtils.LoginUtils;
+
 
 public class App {
 	private static final Logger LOGGER = Logger.getLogger(App.class.getName());
