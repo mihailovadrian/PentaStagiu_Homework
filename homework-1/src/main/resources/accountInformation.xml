@@ -33,5 +33,21 @@
     </void>
    </object>
   </void>
+  <void method="add">
+   <object class="entity.AccountDetails">
+    <void property="accountNumber">
+     <string>EUxxll3344556677889900rr</string>
+    </void>
+    <void property="accountType">
+     <string>EU</string>
+    </void>
+    <void property="balance">
+     <string>9000</string>
+    </void>
+    <void property="username">
+     <string>mihailov</string>
+    </void>
+   </object>
+  </void>
  </object>
 </java>
