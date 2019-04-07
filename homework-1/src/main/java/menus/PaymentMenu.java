@@ -58,7 +58,7 @@ public class PaymentMenu {
 					accountToTransfer.setBalance(accountToTransfer.getBalanceDecimal().add(addResult));
 				} else {
 					accountToTransfer.setBalance(oldBalance);
-					return invalidInputMessage("You can transfer to the same account");
+					return invalidInputMessage("You can transfer to the same account or different account type");
 				}
 			} else
 				return invalidInputMessage("Invalid option");
