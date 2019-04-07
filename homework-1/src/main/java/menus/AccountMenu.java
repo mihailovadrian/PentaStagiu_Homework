@@ -1,4 +1,4 @@
-package userUtils;
+package menus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,39 +11,36 @@ import entity.User;
 import fileUtils.ReadWriteXMLTools;
 import fileUtils.Constants;
 
-public class AccountUtils {
+public class AccountMenu {
 	private static String option = null;
-	private static final Logger LOGGER = Logger.getLogger(AccountUtils.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(AccountMenu.class.getName());
 
-	public static boolean showAccountMenu(User user, Scanner scanner) {
-		ReadWriteXMLTools<AccountDetails> tools = new ReadWriteXMLTools<>(Constants.ACCOUNT_DETAILS_XML);
-		List<AccountDetails> accountDetails = getUserAccounts(user, tools.getInformationResult());
+	public static boolean showAccountMenu(User user, Scanner scanner, List<AccountDetails> accountDetails) {
+		System.out.println("1.Create account \n2.List Accounts");
+		option = scanner.nextLine();
 
-		if (tools != null) {
-			System.out.println("For some reasons the the path for saving the account is in homework-1 ->target ->classes and not in reasources \n1.Create Account \n2.Display Accounts");
-			option = scanner.nextLine();
-
-			switch (option) {
-			case "1":
-				if (createNewAccount(user, tools, scanner))
-					return true;
-				else
-					LOGGER.log(Level.SEVERE, "The new account could not be created");
-			case "2":
-				System.out.println(accountDetails.toString());
+		switch (option) {
+		case "1":
+			if (createNewAccount(user, scanner))
 				return true;
-			default:
-				LOGGER.info("Option not avabile.");
-				break;
+			else
+				LOGGER.log(Level.SEVERE, "The new account could not be created");
+		case "2":
+			System.out.println(accountDetails.toString());
+			return true;
+		default:
+			LOGGER.info("Option not avabile.");
+			break;
 
-			}
 		}
+
 		return false;
 
 	}
 
-	private static boolean createNewAccount(User user, ReadWriteXMLTools<AccountDetails> tools, Scanner scanner) {
+	private static boolean createNewAccount(User user, Scanner scanner) {
 		AccountDetails newAccountDetails = new AccountDetails();
+		ReadWriteXMLTools<AccountDetails> tools = new ReadWriteXMLTools<>(Constants.ACCOUNT_DETAILS_XML);
 		List<AccountDetails> accountDetails = tools.getInformationResult();
 		String accountNumber = null;
 

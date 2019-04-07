@@ -28,7 +28,7 @@ public class ReadWriteXMLTools<T> {
 
 	@SuppressWarnings("unchecked")
 	private List<T> readInformationFromXML() {
-		this.result = new ArrayList<T>();
+		this.result = new ArrayList<>();
 
 		LOGGER.info("path xml : " + filePath);
 		try (XMLDecoder xmlDecoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(filePath)));) {
@@ -65,8 +65,8 @@ public class ReadWriteXMLTools<T> {
 			uriFileName = ClassLoader.getSystemResource(filePath).toURI();
 		} catch (URISyntaxException e1) {
 			LOGGER.log(Level.SEVERE, "Exception occur ", e1);
-
 		}
+
 		return Paths.get(uriFileName).toString();
 	}
 

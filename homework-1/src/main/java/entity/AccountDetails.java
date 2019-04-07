@@ -52,6 +52,9 @@ public class AccountDetails {
 	public void setBalance(String balance) {
 		this.balance = new BigDecimal(balance);
 	}
+	public void setBalance(BigDecimal balance) {
+		this.balance = balance;
+	}
 
 	public String getAccountType() {
 		return accountType;
@@ -94,7 +97,6 @@ public class AccountDetails {
 		int result = 1;
 		result = prime * result + ((accountNumber == null) ? 0 : accountNumber.hashCode());
 		result = prime * result + ((accountType == null) ? 0 : accountType.hashCode());
-		result = prime * result + ((balance == null) ? 0 : balance.hashCode());
 		result = prime * result + ((username == null) ? 0 : username.hashCode());
 		return result;
 	}

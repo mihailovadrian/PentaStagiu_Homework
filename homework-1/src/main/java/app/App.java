@@ -10,7 +10,8 @@ import entity.AccountDetails;
 import entity.User;
 import fileUtils.Constants;
 import fileUtils.ReadWriteXMLTools;
-import userUtils.AccountUtils;
+import menus.AccountMenu;
+import menus.PaymentMenu;
 import userUtils.LoginUtils;
 
 public class App {
@@ -18,7 +19,7 @@ public class App {
 
 	public static void main(String[] args) {
 
-		boolean logedIn = false;
+		boolean logged = false;
 		boolean exitApp = false;
 		User userToLogin = new User();
 
@@ -27,12 +28,12 @@ public class App {
 		List<AccountDetails> userAccountDetails = null;
 		ReadWriteXMLTools<User> toolsUser = new ReadWriteXMLTools<>(Constants.INPUT_USER_INFORMATION_FILE);
 		List<User> users = toolsUser.getInformationResult();
-
+		PaymentMenu payMenu = null;
 		String option = null;
 		// try-with-resources
 		try (Scanner scanIn = new Scanner(System.in)) {
 			while (!exitApp) {
-				if (!logedIn) {
+				if (!logged) {
 					System.out.println("1.Login \n2.Exit");
 					option = scanIn.nextLine();
 
@@ -44,8 +45,8 @@ public class App {
 						userToLogin.setPassword(scanIn.nextLine());
 
 						if (LoginUtils.checkUser(userToLogin, users)) {
-							logedIn = true;
-							userAccountDetails = AccountUtils.getUserAccounts(userToLogin, accountDetails);
+							logged = true;
+							userAccountDetails = AccountMenu.getUserAccounts(userToLogin, accountDetails);
 						}
 						break;
 					case "2":
@@ -61,14 +62,15 @@ public class App {
 					option = scanIn.nextLine();
 					switch (option) {
 					case "1":
-						logedIn = AccountUtils.showAccountMenu(userToLogin, scanIn);
+						logged = AccountMenu.showAccountMenu(userToLogin, scanIn, userAccountDetails);
 						break;
 					case "2":
-						System.out.println(userAccountDetails.toString());
+						payMenu = new PaymentMenu(userAccountDetails);
+						logged = payMenu.showPaymentMenu(scanIn);
 						break;
 
 					case "3":
-						logedIn = false;
+						logged = false;
 						break;
 
 					default:
