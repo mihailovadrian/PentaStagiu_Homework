@@ -7,6 +7,8 @@ import java.util.logging.Logger;
 
 import entity.AccountDetails;
 
+import paymentUtils.PaymentValidation;
+
 public class PaymentMenu {
 
 	private static String option = null;
@@ -24,6 +26,8 @@ public class PaymentMenu {
 		BigDecimal subtractResult;
 		BigDecimal addResult = null;
 		String oldBalance = null;
+		PaymentValidation validation = new PaymentValidation();
+
 		System.out.println("Please  select one of the accounts");
 		showAccount(accountDetails);
 		try {
@@ -52,17 +56,20 @@ public class PaymentMenu {
 
 			if (scanner.hasNextInt()) {
 				option = scanner.nextLine();
+				AccountDetails userInputAccout = accountDetails.get(Integer.parseInt(option));
 
-				if (differentAccount(accountToTransfer, option) && sameAccountType(accountToTransfer, option)) {
+				if (validation.differentAccount(accountToTransfer, userInputAccout)
+						&& validation.sameAccountType(accountToTransfer, userInputAccout)) {
 					accountToTransfer = accountDetails.get(Integer.parseInt(option));
 					accountToTransfer.setBalance(accountToTransfer.getBalanceDecimal().add(addResult));
 				} else {
 					accountToTransfer.setBalance(oldBalance);
 					return invalidInputMessage("You can transfer to the same account or different account type");
 				}
+
 			} else
 				return invalidInputMessage("Invalid option");
-			return invalidInputMessage("Show paymentmoney EXIT");
+			return invalidInputMessage(" Payment done --- in PaymentMenu");
 
 		} catch (IndexOutOfBoundsException e) {
 			return invalidInputMessage("Cont neexistent");
@@ -80,19 +87,6 @@ public class PaymentMenu {
 	private boolean invalidInputMessage(String msg) {
 		LOGGER.warning(msg);
 		return true;
-	}
-
-	private boolean differentAccount(AccountDetails accountToTransfer, String userInputAccount) {
-		if (accountToTransfer.equals(accountDetails.get(Integer.parseInt(userInputAccount))))
-			return false;
-		return true;
-	}
-
-	private boolean sameAccountType(AccountDetails accountToTransfer, String userInputAccount) {
-		if (accountToTransfer.getAccountType()
-				.equals(accountDetails.get(Integer.parseInt(userInputAccount)).getAccountType()))
-			return true;
-		return false;
 	}
 
 }

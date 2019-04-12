@@ -49,5 +49,37 @@
     </void>
    </object>
   </void>
+  <void method="add">
+   <object class="entity.AccountDetails">
+    <void property="accountNumber">
+     <string>RO009988776655443322ffff</string>
+    </void>
+    <void property="accountType">
+     <string>RO</string>
+    </void>
+    <void property="balance">
+     <string>555</string>
+    </void>
+    <void property="username">
+     <string>da</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="entity.AccountDetails">
+    <void property="accountNumber">
+     <string>RO11223344555544332211hh</string>
+    </void>
+    <void property="accountType">
+     <string>RO</string>
+    </void>
+    <void property="balance">
+     <string>333</string>
+    </void>
+    <void property="username">
+     <string>da</string>
+    </void>
+   </object>
+  </void>
  </object>
 </java>

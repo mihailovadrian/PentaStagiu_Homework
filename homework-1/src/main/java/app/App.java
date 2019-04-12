@@ -13,12 +13,11 @@ import java.util.logging.Logger;
 import entity.AccountDetails;
 
 import entity.User;
-
 import fileUtils.Constants;
 import fileUtils.ReadWriteXMLTools;
 import menus.AccountMenu;
 import menus.PaymentMenu;
-import userUtils.LoginUtils;
+import userUtils.Login;
 
 public class App {
 
@@ -27,33 +26,24 @@ public class App {
 	public static void main(String[] args) {
 
 		boolean logged = false;
-
 		boolean exitApp = false;
 
 		User userToLogin = new User();
 
 		ReadWriteXMLTools<AccountDetails> toolsAccount = new ReadWriteXMLTools<>(Constants.ACCOUNT_DETAILS_XML);
-
 		List<AccountDetails> accountDetails = toolsAccount.getInformationResult();
-
 		List<AccountDetails> userAccountDetails = null;
-
 		ReadWriteXMLTools<User> toolsUser = new ReadWriteXMLTools<>(Constants.INPUT_USER_INFORMATION_FILE);
-
 		List<User> users = toolsUser.getInformationResult();
 
 		String option = null;
-
-		// try-with-resources
 
 		try (Scanner scanIn = new Scanner(System.in)) {
 
 			while (!exitApp) {
 
 				if (!logged) {
-
 					System.out.println("1.Login \n2.Exit");
-
 					option = scanIn.nextLine();
 
 					switch (option) {
@@ -61,17 +51,14 @@ public class App {
 					case "1":
 
 						System.out.println("User Name: ");
-
 						userToLogin.setUsername(scanIn.nextLine());
 
 						System.out.println("Password: ");
-
 						userToLogin.setPassword(scanIn.nextLine());
 
-						if (LoginUtils.checkUser(userToLogin, users)) {
+						if (Login.checkUser(userToLogin, users)) {
 
 							logged = true;
-
 							userAccountDetails = AccountMenu.getUserAccounts(userToLogin, accountDetails);
 
 						}
@@ -79,15 +66,11 @@ public class App {
 						break;
 
 					case "2":
-
 						exitApp = true;
-
 						break;
 
 					default:
-
 						LOGGER.warning("Option not avabile.");
-
 						break;
 
 					}
@@ -102,7 +85,7 @@ public class App {
 
 					case "1":
 
-						logged = AccountMenu.showAccountMenu(userToLogin, scanIn, accountDetails);
+						logged = AccountMenu.showAccountMenu(userToLogin, scanIn, userAccountDetails);
 
 						break;
 
@@ -133,9 +116,7 @@ public class App {
 		} catch (InputMismatchException ex) {
 
 			LOGGER.log(Level.SEVERE, "Exception occur ", ex);
-
 		}
-
 	}
 
 }
