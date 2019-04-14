@@ -1,29 +1,28 @@
-package fileUtils;
+package com.pentalog.stagiu.utils;
 
 import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
-
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+
 import java.net.URI;
 import java.net.URISyntaxException;
-
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class ReadWriteXMLTools<T> {
+public class ReadWriteXMLUtils<T> {
 	private List<T> result;
 	private String filePath = null;
 
-	private static final Logger LOGGER = Logger.getLogger(ReadWriteXMLTools.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(ReadWriteXMLUtils.class.getName());
 
-	public ReadWriteXMLTools(String filePath) {
+	public ReadWriteXMLUtils(String filePath) {
 		this.filePath = xmlFilePath(filePath);
 		this.result = readInformationFromXML();
 	}

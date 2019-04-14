@@ -1,4 +1,4 @@
-package menus;
+package com.pentalog.stagiu.menus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,11 +6,11 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.pentalog.stagiu.utils.Constants;
+import com.pentalog.stagiu.utils.ReadWriteXMLUtils;
+
 import entity.AccountDetails;
 import entity.User;
-import fileUtils.Constants;
-import fileUtils.ReadWriteXMLTools;
-
 
 public class AccountMenu {
 	private static String option = null;
@@ -41,7 +41,7 @@ public class AccountMenu {
 
 	private static boolean createNewAccount(User user, Scanner scanner) {
 		AccountDetails newAccountDetails = new AccountDetails();
-		ReadWriteXMLTools<AccountDetails> tools = new ReadWriteXMLTools<>(Constants.ACCOUNT_DETAILS_XML);
+		ReadWriteXMLUtils<AccountDetails> tools = new ReadWriteXMLUtils<>(Constants.ACCOUNT_DETAILS_XML);
 		List<AccountDetails> accountDetails = tools.getInformationResult();
 		String accountNumber = null;
 

@@ -1,23 +1,19 @@
-package app;
+package com.pentalog.stagiu;
 
 import java.util.InputMismatchException;
-
 import java.util.List;
-
 import java.util.Scanner;
-
 import java.util.logging.Level;
-
 import java.util.logging.Logger;
 
-import entity.AccountDetails;
+import com.pentalog.stagiu.menus.AccountMenu;
+import com.pentalog.stagiu.menus.PaymentMenu;
+import com.pentalog.stagiu.utils.Constants;
+import com.pentalog.stagiu.utils.ReadWriteXMLUtils;
+import com.pentalog.stagiu.utils.UserUtils;
 
+import entity.AccountDetails;
 import entity.User;
-import fileUtils.Constants;
-import fileUtils.ReadWriteXMLTools;
-import menus.AccountMenu;
-import menus.PaymentMenu;
-import userUtils.Login;
 
 public class App {
 
@@ -30,10 +26,10 @@ public class App {
 
 		User userToLogin = new User();
 
-		ReadWriteXMLTools<AccountDetails> toolsAccount = new ReadWriteXMLTools<>(Constants.ACCOUNT_DETAILS_XML);
+		ReadWriteXMLUtils<AccountDetails> toolsAccount = new ReadWriteXMLUtils<>(Constants.ACCOUNT_DETAILS_XML);
 		List<AccountDetails> accountDetails = toolsAccount.getInformationResult();
 		List<AccountDetails> userAccountDetails = null;
-		ReadWriteXMLTools<User> toolsUser = new ReadWriteXMLTools<>(Constants.INPUT_USER_INFORMATION_FILE);
+		ReadWriteXMLUtils<User> toolsUser = new ReadWriteXMLUtils<>(Constants.INPUT_USER_INFORMATION_FILE);
 		List<User> users = toolsUser.getInformationResult();
 
 		String option = null;
@@ -56,7 +52,7 @@ public class App {
 						System.out.println("Password: ");
 						userToLogin.setPassword(scanIn.nextLine());
 
-						if (Login.checkUser(userToLogin, users)) {
+						if (UserUtils.checkUser(userToLogin, users)) {
 
 							logged = true;
 							userAccountDetails = AccountMenu.getUserAccounts(userToLogin, accountDetails);

@@ -1,4 +1,4 @@
-package exceptions;
+package com.pentalog.stagiu.exceptions;
 
 public class AccountTypeException extends RuntimeException {
 	private static final long serialVersionUID = 1L;

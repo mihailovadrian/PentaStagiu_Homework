@@ -1,13 +1,13 @@
-package menus;
+package com.pentalog.stagiu.menus;
 
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Scanner;
 import java.util.logging.Logger;
 
-import entity.AccountDetails;
+import com.pentalog.stagiu.utils.PaymentUtils;
 
-import paymentUtils.PaymentValidation;
+import entity.AccountDetails;
 
 public class PaymentMenu {
 
@@ -26,7 +26,7 @@ public class PaymentMenu {
 		BigDecimal subtractResult;
 		BigDecimal addResult = null;
 		String oldBalance = null;
-		PaymentValidation validation = new PaymentValidation();
+		PaymentUtils validation = new PaymentUtils();
 
 		System.out.println("Please  select one of the accounts");
 		showAccount(accountDetails);

@@ -1,4 +1,4 @@
-package exceptions;
+package com.pentalog.stagiu.exceptions;
 
 public class CheckUserValidationException extends Exception {
 

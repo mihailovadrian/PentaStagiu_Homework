@@ -1,9 +1,10 @@
-package paymentUtils;
+package com.pentalog.stagiu.utils;
+
+import com.pentalog.stagiu.exceptions.AccountTypeException;
 
 import entity.AccountDetails;
-import exceptions.AccountTypeException;
 
-public class PaymentValidation {
+public class PaymentUtils {
 	public boolean differentAccount(AccountDetails accountToTransfer, AccountDetails userInputAccount) {
 		if (accountToTransfer.equals(userInputAccount))
 			throw new AccountTypeException("Can not transfer to the same account!");
